@@ -34,6 +34,7 @@ resource "aws_instance" "jenkins_server" {
     sudo systemctl enable docker
     sudo systemctl start docker
     sudo usermod -aG docker ubuntu  # Allowing 'ubuntu' user to run Docker commands
+    sudo chmod 666 /var/run/docker.sock
 
     # Install AWS CLI v2
     sudo curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
