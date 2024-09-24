@@ -37,10 +37,9 @@ resource "aws_instance" "jenkins_server" {
     sudo chmod 666 /var/run/docker.sock
 
     # Install AWS CLI v2
-    sudo curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    sudo apt-get install -y unzip
-    sudo unzip awscliv2.zip
-    sudo ./aws/install -y
+    sudo apt-get update -y
+    sudo apt-get install python3-pip -y
+    sudo pip install awscli -y
 
     # Install kubectl
     sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -48,7 +47,6 @@ resource "aws_instance" "jenkins_server" {
     sudo apt install gh -y
 
     # Clean up installation files
-    rm -f awscliv2.zip
     rm -f kubectl
 
     # Output Jenkins password
