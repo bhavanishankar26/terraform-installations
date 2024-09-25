@@ -37,9 +37,10 @@ resource "aws_instance" "jenkins_server" {
     sudo chmod 666 /var/run/docker.sock
 
     # Install AWS CLI v2
-    sudo apt-get update -y
-    sudo apt-get install python3-pip -y
-    sudo pip install awscli -y
+    sudo apt install unzip -y
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.30.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
 
     # Install kubectl
     sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
